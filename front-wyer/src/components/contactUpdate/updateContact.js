@@ -3,10 +3,12 @@ import Control from "../formControl/control";
 import ControlDrop from "../dropDown/dropdown";
 import NavBar from "../navBar/navBar";
 import Button from '../btnForm/btnForm';
+import moment from 'moment';
 import axios from 'axios';
 
-function NewContact({id}) {
-    console.log(id);
+function NewContact(props) {
+    const [id, setId] = useState(localStorage.getItem("id"));
+
     const [dataForm, setDataForm] = useState({
         name: "",
         lastname: "",
@@ -72,25 +74,42 @@ function NewContact({id}) {
     useEffect(()=>{
         const url = 'http://localhost:3001/api/contacts/'+id;
         axios.get(url).then((res) => {
-            console.log(res.data);
+            const datos = dataForm;
             const data = controls.map(element=>{
-                element.value = res.data[element.name];
+                if (element.name !== "date") {
+                    element.value =  res.data[element.name];   
+                }
+                datos[element.name] = element.name == "date" ? moment(res.data[element.name]).format('DD/MM/YYYY') : res.data[element.name];
                 return element;
             })
-            //console.log(JSON.stringify(data));
+            setDataForm(datos);
             setControls(data);
         });
     },[])
 
     const inputChange = (event) => {
+        const data = controls;
+        const name = event.target.name, value = event.target.value;
+        data.map(item=>{
+            if (item.name == name) {
+                item.value = value;
+            }
+        })
+        setControls(data)
         setDataForm({
             ...dataForm,
-            [event.target.name]: event.target.name=="name" ? event.target.value.toLowerCase() : event.target.name=="lastname" ? event.target.value.toLowerCase() : event.target.value,
+            [name]: name=="name" ? value.toLowerCase() : name=="lastname" ? value.toLowerCase() : value,
         })
     }
 
     const submitData = (event) => {
-        axios.post('http://localhost:3001/api/contacts', dataForm).then((res) => window.location = '/');
+        const url='http://localhost:3001/api/contacts/update/'+id;
+        //console.log(url);
+        //console.log("data:"+JSON.stringify(dataForm));
+        axios.put(url, dataForm).then((res) => {
+            localStorage.removeItem('id');
+            window.location = '/'
+        });
     }
     return (
         <div className="row mt-4">

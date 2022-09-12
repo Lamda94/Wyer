@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import './item.css';
 
-function Item({item, active}) {
+function Item(props) {
+    const {item, active} = props;
     const [id, setId] = useState([])
 
     useEffect(() => {

@@ -1,6 +1,7 @@
-function Item(data) {
+function Item(props) {
+    const {data} = props
     return (
-        data.data.map(item=>{
+        data.map(item=>{
             return(
                 <option value={item}>{item}</option>
             )

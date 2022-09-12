@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useHref} from 'react-router-dom';
 import axios from 'axios';
 
 import Contact from '../contact/contact';
@@ -6,7 +7,7 @@ import Button from '../button/button';
 import Search from "../Search/search";
 import NavBar from "../navBar/navBar";
 import './contactList.css';
-function ContactList({ func }) {
+function ContactList() {
     const [btn, setBtn] = useState([{ url: "/contact/new", name: "Agregar" }])
     const [contacts, setContacts] = useState([])
 
@@ -47,8 +48,7 @@ function ContactList({ func }) {
     }
 
     const updateFunc = (event) => {
-        const id = event.target.id;
-        func(id);
+        localStorage.setItem("id", event.target.id);        
         window.location = '/contact/update'
     }
 

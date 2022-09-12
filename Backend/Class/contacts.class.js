@@ -65,7 +65,6 @@ class Contact {
                 comments: [],
                 task: []
             });
-            console.log("Contact"+contact);
             return {
                 status: 200,
                 data: contact
@@ -101,9 +100,15 @@ class Contact {
                     task: []
                 }
             });
-            return contact;
+            return {
+                status: 200,
+                data: contact
+            };
         } catch (error) {
-            return error;
+            return {
+                status: 500,
+                data: error
+            };
         } finally {
             await mongoose.disconnect();
         }

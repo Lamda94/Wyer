@@ -1,4 +1,5 @@
-function Button({btn, func}) {
+function Button(props) {
+    const {btn, func} = props;
     return ( 
         <a className={btn.class} onClick={func}>
             {btn.name}

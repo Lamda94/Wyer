@@ -15,6 +15,8 @@ router.post('/addTask', contactController.addTask);
 
 router.post('/search', contactController.searchContacts);
 
+router.put('/update/:id', contactController.updateContact);
+
 router.delete('/delete/:id', contactController.deleteContact);
 
 module.exports = router;

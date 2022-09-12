@@ -115,3 +115,10 @@ exports.searchContacts = async (req, res)=>{
     const data = await contactClass.searchContact(filter);
     return res.status(data.status).json(data.data);  
 }
+
+exports.updateContact = async (req, res)=>{
+    const id = req.params.id;
+    const dataBody = req.body;
+    const data = await contactClass.updateContact(id, dataBody);
+    return res.status(data.status).json(data.data);  
+}

@@ -1,4 +1,5 @@
-function Button({btn}) {
+function Button(props) {
+    const {btn} = props;
     return ( 
         <a className="btn btn-primary rounded-pill" href={btn[0].url}>
             {btn[0].name}

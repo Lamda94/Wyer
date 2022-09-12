@@ -6,18 +6,13 @@ import NewContact from "../components/newContact/newContact";
 import UpdateContact from "../components/contactUpdate/updateContact";
 
 function Home() {
-    const [id, setId] = useState(0);
-    useEffect(()=>{
-        console.log("contact id:"+id);
-    },[id])
-
     return (
         <div className="container-fluid bg-dark">
            <Router>
                 <Routes>
-                    <Route path="/" element={<ContactList func={setId}/>}/>
+                    <Route path="/" element={<ContactList/>}/>
                     <Route path="/contact/new" element={<NewContact/>}/>
-                    <Route path="/contact/update" element={<UpdateContact id={id}/>}/>
+                    <Route path="/contact/update" element={<UpdateContact/>}/>
                 </Routes>
            </Router>
         </div>
