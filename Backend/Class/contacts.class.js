@@ -10,10 +10,10 @@ class Contact {
     }
 
     //get contacts
-    async getContacts() {
+    async getContacts(filter = false) {
         try {
             await mongoose.connect(this.MDBURI);
-            const contacts = await ContactModel.find()
+            const contacts = filter ? await ContactModel.find().limit(filter.max) : await ContactModel.find();
             return {
                 status: 200,
                 data: contacts
@@ -34,9 +34,16 @@ class Contact {
         try {
             await mongoose.connect(this.MDBURI);
             const contact = await ContactModel.findOne({ _id: id })
-            return contact;
+            return {
+                status: 200,
+                data: contact
+            };
         } catch (error) {
-            return null;
+            console.log(error);
+            return {
+                status: 500,
+                data: error
+            };
         }finally{
             await mongoose.disconnect();
         }
@@ -45,7 +52,6 @@ class Contact {
     //add contact
     async saveContact(data) {
         try {
-            console.log(JSON.stringify(data));
             await mongoose.connect(this.MDBURI);
             const contact = await ContactModel.insertMany({
                 name: data.name,
@@ -176,6 +182,29 @@ class Contact {
                 data: {
                     msj: "Usuaio no encontrado"
                 }
+            }
+        } catch (error) {
+            return {
+                status:500,
+                data: error
+            }
+        } finally {
+            await mongoose.disconnect();
+        }
+    }
+
+    async searchContact (search){
+        try{
+            await mongoose.connect(this.MDBURI);
+            const contact = await ContactModel.find({
+                $or:[
+                    {"name": { $regex: '.*' + search.toLowerCase() + '.*' }},
+                    {"lastname": { $regex: '.*' + search.toLowerCase() + '.*' }}
+                ]
+            });
+            return {
+                status:200,
+                data: contact
             }
         } catch (error) {
             return {

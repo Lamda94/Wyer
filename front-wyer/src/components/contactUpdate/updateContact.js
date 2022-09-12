@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Control from "../formControl/control";
 import ControlDrop from "../dropDown/dropdown";
 import NavBar from "../navBar/navBar";
 import Button from '../btnForm/btnForm';
 import axios from 'axios';
 
-function NewContact() {
+function NewContact({id}) {
+    console.log(id);
     const [dataForm, setDataForm] = useState({
         name: "",
         lastname: "",
@@ -66,7 +67,20 @@ function NewContact() {
             value: "Origen",
             items: ["Landing page"]
         }
-    ])
+    ]);
+
+    useEffect(()=>{
+        const url = 'http://localhost:3001/api/contacts/'+id;
+        axios.get(url).then((res) => {
+            console.log(res.data);
+            const data = controls.map(element=>{
+                element.value = res.data[element.name];
+                return element;
+            })
+            //console.log(JSON.stringify(data));
+            setControls(data);
+        });
+    },[])
 
     const inputChange = (event) => {
         setDataForm({

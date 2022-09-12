@@ -45,7 +45,14 @@ const contact =
 
 
 exports.getContacts = async (req, res)=>{
-    const data = await contactClass.getContacts();
+    const filter = req.body.filter;
+    const data = filter ? await contactClass.getContacts(filter) : await contactClass.getContacts();
+    return res.status(data.status).json(data.data);  
+}
+
+exports.getContact = async (req, res)=>{
+    const filter = req.params.id;
+    const data = await contactClass.getContact(filter);
     return res.status(data.status).json(data.data);  
 }
 
@@ -101,4 +108,10 @@ exports.deleteContact = async (req, res)=>{
         return res.status(data.status).json(data.data);
     }
     return res.status(400).json({msj:"Datos invalidos o incompletos"});
+}
+
+exports.searchContacts = async (req, res)=>{
+    const filter = req.body.search;
+    const data = await contactClass.searchContact(filter);
+    return res.status(data.status).json(data.data);  
 }
