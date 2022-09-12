@@ -1,4 +1,4 @@
-# Prueba Tecnica WYER 
+# Prueba Técnica WYER 
 
 Este aplicativo fue desarrollado utilizando el stack MERN .
 
