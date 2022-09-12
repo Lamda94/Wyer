@@ -9,6 +9,8 @@ router.post('/', contactController.saveContact);
 
 router.post('/addComment/', contactController.addComment);
 
-router.post('/addTask', contactController.addTask)
+router.post('/addTask', contactController.addTask);
+
+router.delete('/delete/:id', contactController.deleteContact);
 
 module.exports = router;

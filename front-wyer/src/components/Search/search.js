@@ -1,8 +1,8 @@
 function Search() {
     return ( 
-    <div class="input-group bg-light ">        
-        <input type="text" class="form-control bg-ligth" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon"/>
-        <div class="input-group-text bg-light" ><i class="bi bi-search"></i></div>
+    <div className="input-group bg-light ">        
+        <input type="text" className="form-control bg-ligth" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon"/>
+        <div className="input-group-text bg-light" ><i className="bi bi-search"></i></div>
     </div> 
     );
 }

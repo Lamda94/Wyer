@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './navBar.css';
 import Item from '../navItem/item';
-//import React, { Component } from 'react';
 
-function NavBar() {
-    const [items, setItems] = useState([{id:1,name:"Contactos"}, {id:2,name:"Tareas"}, {id:3, name:"Comentarios"}]);
+function NavBar(active) {
+    const [items, setItems] = useState([{id:1,name:"Contactos",icono:"bi bi-person"}, {id:2,name:"Tareas",icono:"bi bi-file-earmark-check"}, {id:3, name:"Comentarios",icono:"bi bi-chat-right-text"}]);
     
     return (
-        <nav class="navbar sticky-bottom menu rounded-top">
-            <div class="container-fluid justify-content-center">
+        <nav className="navbar sticky-bottom menu rounded-top pt-0">
+            <div className="container-fluid justify-content-center">
                 {items.map((item) => {
                     return(
-                        <Item key={item.id} item={item}/>
+                        <Item key={item.id} item={item} active={active}/>
                     );
                 })}
             </div>

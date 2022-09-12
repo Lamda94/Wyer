@@ -36,7 +36,7 @@ const contact =
     name: {type: "string"},
     lastname: {type: "string"},
     email: {type: "string"},
-    phone: {type: "integer"},
+    phone: {type: "string"},
     date: {type: "string"},
     adress: {type: "string"},
     contactType: {type: "string"},
@@ -55,12 +55,13 @@ exports.saveContact = async (req, res)=>{
     const validator = ajv.compile(schema);
     
     const contactData = req.body;
-
+    console.log(validator(contactData));
     if(validator(contactData)){
         const data = await contactClass.saveContact(contactData);
         return res.status(data.status).json(data.data)   ;
     }
 
+    
     return res.status(400).json({msj:"Datos invalidos o incompletos"});
 }
 
@@ -88,6 +89,15 @@ exports.addTask = async (req, res)=>{
     const taskData = req.body;
     if(validator(taskData)){
         const data = await contactClass.addTask(taskData.id, taskData.body);
+        return res.status(data.status).json(data.data);
+    }
+    return res.status(400).json({msj:"Datos invalidos o incompletos"});
+}
+
+exports.deleteContact = async (req, res)=>{
+    const id = req.params.id;
+    if(id){
+        const data = await contactClass.deleteContact(id)
         return res.status(data.status).json(data.data);
     }
     return res.status(400).json({msj:"Datos invalidos o incompletos"});

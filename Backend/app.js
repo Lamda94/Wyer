@@ -13,5 +13,5 @@ app.use("/api/contacts/", contactRouter);
 
 //app.use(notFound);
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT, ()=>console.log(`App start on http://localhost:${PORT}`));

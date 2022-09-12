@@ -1,19 +1,19 @@
 import './contact.css'
-function Contact() {
+function Contact({data, func}) {
     return ( 
         <div className="row border-bottom mb-2">
-            <div className="col-7 d-block">
+            <div className="col-6 d-block">
                 <div className="row bold">
-                    John Doe
+                    {data.name+" "+data.lastname}
                 </div>
                 <div className="row color">
-                    (+57) 123 456 7890
+                    {data.phone}
                 </div>
             </div>
-            <div className="col-5 d-block float-end">
-                <i class="bi bi-pencil ms-2 color icono"></i>
-                <i class="bi bi-check2-circle ms-2 color icono"></i>
-                <i class="bi bi-trash-fill ms-2 color icono"></i>
+            <div className="col-6 d-block float-end">
+                <i className="bi bi-pencil ms-3 color icono float-end"></i>
+                <i className="bi bi-check2-circle ms-3 color icono float-end"></i>
+                <i className="bi bi-trash-fill ms-2 color icono float-end" id={data._id} onClick={func}></i>
             </div>
         </div>
      );

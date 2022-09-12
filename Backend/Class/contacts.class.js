@@ -45,6 +45,7 @@ class Contact {
     //add contact
     async saveContact(data) {
         try {
+            console.log(JSON.stringify(data));
             await mongoose.connect(this.MDBURI);
             const contact = await ContactModel.insertMany({
                 name: data.name,
@@ -58,6 +59,7 @@ class Contact {
                 comments: [],
                 task: []
             });
+            console.log("Contact"+contact);
             return {
                 status: 200,
                 data: contact
@@ -105,14 +107,19 @@ class Contact {
     async deleteContact(id) {
         try {
             await mongoose.connect(this.MDBURI);
-            const contact = await ContactModel.deleteOne({ _id: id });
-            return contact;
+            await ContactModel.deleteOne({ id: id });
+            return {
+                status: 200,
+                data: { msj: "Contacto eliminado correctamente" }
+            };
         } catch (error) {
-            return error;
+            return {
+                status: 500,
+                data: error
+            };
         }
         finally {
             await mongoose.disconnect();
-
         }
     }
 

@@ -1,0 +1,9 @@
+#active{
+    box-sizing: border-box;
+    border-top: solid 7px #7AFA78;
+}
+
+#inactive{
+    box-sizing: border-box;
+    border-top: solid 7px #2980B9;
+}
