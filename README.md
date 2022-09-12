@@ -25,3 +25,9 @@ Para ejecutar el front de nuestro aplicativo debemos.
 ### `npm start`
 
 Listo con esto nuestro aplicativo estará funcionando correctamente.
+
+En este aplicativo podremos hacer uso de las funciones de:
+1.	Registrar contacto
+2.	Listar contactos
+3.	Editar contactos
+4.	Eliminar contactos
